@@ -1,4 +1,9 @@
-CREATE TABLE messages (
+CREATE TABLE reviews (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    message TEXT
+    name VARCHAR(120) NOT NULL,
+    title VARCHAR(120) NOT NULL,
+    company VARCHAR(120) NOT NULL,
+    rate TINYINT NOT NULL,
+    description TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

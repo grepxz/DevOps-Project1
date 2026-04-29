@@ -4,227 +4,460 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prashant | Flask App 🚀</title>
+    <title>Reviews | Personal Portfolio</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', sans-serif;
         }
 
         body {
-            background: linear-gradient(160deg, #0C0D16, #1A1C2B);
-            color: #ffffff;
+            background: #0E0F14;
+            color: #E8EAED;
+            min-height: 100vh;
+            padding: 60px 20px 80px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        /* Personal card */
+        .profile {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .profile img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .profile h1 {
+            font-size: 1.7rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 10px;
+            color: #F5F6F8;
+        }
+
+        .profile p {
+            font-size: 0.98rem;
+            line-height: 1.6;
+            color: #9AA0A6;
+            max-width: 460px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* Subtle stats line */
+        .stats {
             display: flex;
             justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
+            gap: 28px;
+            margin-top: 28px;
+            font-size: 0.85rem;
+            color: #6F7480;
         }
 
-        /* Flex container for profile + content */
-        .container {
-            display: flex;
-            flex-direction: row;
-            max-width: 1050px;
+        .stats span b {
+            color: #E8EAED;
+            font-weight: 500;
+        }
+
+        .stats .dot {
+            color: #2E323A;
+        }
+
+        /* Divider section header */
+        .section-title {
+            text-align: center;
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: #6F7480;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+            position: relative;
+        }
+
+        .section-title::before,
+        .section-title::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 80px;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        .section-title::before { left: calc(50% - 150px); }
+        .section-title::after  { right: calc(50% - 150px); }
+
+        /* Form */
+        .form-wrap {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+            padding: 26px;
+            margin-bottom: 40px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.78rem;
+            color: #6F7480;
+            margin-bottom: 6px;
+            font-weight: 400;
+        }
+
+        input[type="text"],
+        textarea {
             width: 100%;
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+            padding: 11px 13px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.02);
+            color: #E8EAED;
+            border-radius: 8px;
+            font-size: 0.92rem;
+            transition: border-color 0.2s ease, background 0.2s ease;
+            font-family: inherit;
         }
 
-        /* Left side: profile photo */
-        .profile-photo {
-            flex: 0 0 200px;
-            margin-right: 30px;
-        }
-
-        .profile-photo img {
-            width: 100%;
-            border-radius: 50%;
-            border: 3px solid #5599FF;
-            box-shadow: 0 4px 15px rgba(85, 153, 255, 0.5);
-        }
-
-        /* Right side: content */
-        .content {
-            flex: 1;
-        }
-
-        .header h1 {
-            font-size: 2rem;
-            font-weight: 600;
-            color: #5599FF;
-            margin-bottom: 8px;
-        }
-
-        .header p {
-            font-size: 1rem;
-            color: #ccc;
-            margin-bottom: 15px;
-        }
-
-        .about {
-            margin-bottom: 20px;
-            padding: 10px 15px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .about h2 {
-            font-size: 1.3rem;
-            color: #5599FF;
-            margin-bottom: 8px;
-        }
-
-        .about p {
-            font-size: 0.95rem;
-            color: #ddd;
+        textarea {
+            resize: vertical;
+            min-height: 90px;
             line-height: 1.5;
         }
 
-        .messages {
-            margin-bottom: 15px;
-            padding: 12px;
-            background: rgba(85, 153, 255, 0.08);
-            border: 1px solid rgba(85, 153, 255, 0.2);
-            border-radius: 12px;
-            max-height: 200px;
-            overflow-y: auto;
-            text-align: left;
-        }
-
-        .messages p {
-            padding: 8px;
-            background: rgba(255, 255, 255, 0.07);
-            border-radius: 8px;
-            margin-bottom: 6px;
-            font-size: 0.95rem;
-        }
-
-        input[type="text"] {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid rgba(85, 153, 255, 0.3);
-            background: rgba(255, 255, 255, 0.05);
-            color: #fff;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        input[type="text"]:focus {
-            border-color: #5599FF;
-            box-shadow: 0 0 12px rgba(85, 153, 255, 0.6);
+        input[type="text"]:focus,
+        textarea:focus {
+            border-color: rgba(255, 255, 255, 0.22);
+            background: rgba(255, 255, 255, 0.035);
             outline: none;
         }
 
-        input[type="submit"] {
+        input::placeholder,
+        textarea::placeholder {
+            color: #50545E;
+        }
+
+        .rate-stars {
+            display: flex;
+            gap: 4px;
+            font-size: 1.35rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .rate-stars span {
+            color: #2E323A;
+            transition: color 0.15s ease;
+        }
+
+        .rate-stars span.active {
+            color: #E8EAED;
+        }
+
+        button[type="submit"] {
             width: 100%;
             padding: 12px;
-            background: #5599FF;
-            color: #ffffff;
+            background: #E8EAED;
+            color: #0E0F14;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 16px;
-            transition: all 0.3s ease;
+            font-size: 0.92rem;
+            font-weight: 500;
+            transition: opacity 0.2s ease;
+            margin-top: 4px;
+            font-family: inherit;
         }
 
-        input[type="submit"]:hover {
-            background: #417ad6;
-            box-shadow: 0 0 15px rgba(85, 153, 255, 0.6);
-            transform: translateY(-2px);
+        button[type="submit"]:hover {
+            opacity: 0.85;
         }
 
-        /* Responsive */
-        @media (max-width: 800px) {
-            .container {
-                flex-direction: column;
-                align-items: center;
-            }
+        /* Reviews list */
+        .review {
+            padding: 22px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
 
-            .profile-photo {
-                margin-right: 0;
-                margin-bottom: 20px;
-                flex: 0 0 auto;
-            }
+        .review:last-child { border-bottom: none; }
+
+        .review-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            gap: 12px;
+        }
+
+        .review-head .who {
+            font-weight: 500;
+            color: #E8EAED;
+            font-size: 0.95rem;
+        }
+
+        .review-head .who small {
+            display: block;
+            font-weight: 400;
+            color: #6F7480;
+            font-size: 0.78rem;
+            margin-top: 2px;
+        }
+
+        .review-head .stars {
+            color: #E8EAED;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            letter-spacing: 1px;
+        }
+
+        .review-head .stars .empty {
+            color: #2E323A;
+        }
+
+        .review-desc {
+            color: #B7BBC2;
+            font-size: 0.92rem;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .review-date {
+            font-size: 0.72rem;
+            color: #50545E;
+            margin-top: 10px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 32px 20px;
+            color: #6F7480;
+            font-size: 0.88rem;
+            font-weight: 300;
+        }
+
+        .error {
+            background: rgba(255, 80, 80, 0.06);
+            border: 1px solid rgba(255, 80, 80, 0.2);
+            color: #ff9999;
+            padding: 10px 12px;
+            border-radius: 8px;
+            margin-bottom: 14px;
+            font-size: 0.85rem;
+            display: none;
+        }
+
+        @media (max-width: 520px) {
+            body { padding: 40px 18px 60px; }
+            .form-row { grid-template-columns: 1fr; gap: 0; }
+            .section-title::before,
+            .section-title::after { display: none; }
+            .stats { gap: 18px; }
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <!-- Profile photo -->
-        <div class="profile-photo">
-            <img src="1.png" alt="Prashant Photo">
+
+        <div class="profile">
+            <img src="{{ url_for('static', filename='avatar.png') }}"
+                 onerror="this.src='https://api.dicebear.com/7.x/initials/svg?seed=YN&backgroundColor=1a1c24&textColor=E8EAED';"
+                 alt="Profile photo">
+            <h1>Hanna Nyzhnisa</h1>
+            <p>Dedicated cybersecurity professional and developer with 4+ years of experience and a Master of Science in Cybersecurity.</p>
+
+            <div class="stats">
+                <span><b>{{ avg }}</b> / 5</span>
+                <span class="dot">·</span>
+                <span><b>{{ total }}</b> review{{ '' if total == 1 else 's' }}</span>
+            </div>
         </div>
 
-        <!-- Content -->
-        <div class="content">
-            <div class="header">
-                <h1>Hanna | DevOps Enthusiast</h1>
-                <p>Aspiring Cloud & DevOps Engineer</p>
-            </div>
+        <div class="section-title">Reviews</div>
 
-            <div class="about">
-                <h2>About Me</h2>
-                <p>Hi, I'm <b>Hanna</b> 👋, a Cloud & DevOps engineer.</p>
-                <p style="margin-top:10px;">
-                    <b>Project:</b> I have deployed a 2-tier Flask application (Flask + MySQL) on AWS EC2 using Docker.  
-                    I used Docker Compose to manage both containers with volumes and a custom network.  
-                    The source code is hosted on GitHub, and Jenkins is integrated to set up a CI/CD pipeline for automated deployment!
-                </p>
-            </div>
+        <div class="form-wrap">
+            <div class="error" id="formError"></div>
+            <form id="reviewForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Jane Doe" required maxlength="120">
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Relationship</label>
+                        <input type="text" id="title" name="title" placeholder="Former Manager" required maxlength="120">
+                    </div>
+                </div>
 
-            <div class="messages">
-                {% for message in messages %}
-                    <p>{{ message[0] }}</p>
-                {% endfor %}
-            </div>
+                <div class="form-group">
+                    <label for="company">Company</label>
+                    <input type="text" id="company" name="company" placeholder="Acme Corp" required maxlength="120">
+                </div>
 
-            <form id="messageForm">
-                <input type="text" name="new_message" placeholder="Type your message..." required>
-                <input type="submit" value="Send">
+                <div class="form-group">
+                    <label>Rating</label>
+                    <div class="rate-stars" id="rateStars">
+                        <span data-value="1">★</span>
+                        <span data-value="2">★</span>
+                        <span data-value="3">★</span>
+                        <span data-value="4">★</span>
+                        <span data-value="5">★</span>
+                    </div>
+                    <input type="hidden" name="rate" id="rate" value="">
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Review</label>
+                    <textarea id="description" name="description" placeholder="Share what it was like working together..." required></textarea>
+                </div>
+
+                <button type="submit">Post review</button>
             </form>
         </div>
+
+        <div class="reviews-list" id="reviewsList">
+            {% if reviews %}
+                {% for r in reviews %}
+                <div class="review">
+                    <div class="review-head">
+                        <div class="who">
+                            {{ r.name }}
+                            <small>{{ r.title }} · {{ r.company }}</small>
+                        </div>
+                        <div class="stars">
+                            {% for i in range(1, 6) %}
+                                {% if i <= r.rate %}★{% else %}<span class="empty">★</span>{% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="review-desc">{{ r.description }}</div>
+                    <div class="review-date">{{ r.created_at }}</div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="empty-state" id="emptyState">No reviews yet — be the first to share.</div>
+            {% endif %}
+        </div>
+
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $("#messageForm").on("submit", function(event) {
-                event.preventDefault();
-                let messageInput = $("input[name='new_message']");
-                let message = messageInput.val().trim();
+        $(function () {
+            const $stars = $('#rateStars span');
+            const $rate = $('#rate');
 
-                if (message === "") {
-                    alert("Message cannot be empty!");
+            function paint(value) {
+                $stars.each(function () {
+                    $(this).toggleClass('active', $(this).data('value') <= value);
+                });
+            }
+
+            $stars.on('click', function () {
+                const v = $(this).data('value');
+                $rate.val(v);
+                paint(v);
+            });
+
+            $stars.on('mouseenter', function () {
+                paint($(this).data('value'));
+            });
+
+            $('#rateStars').on('mouseleave', function () {
+                paint(parseInt($rate.val(), 10) || 0);
+            });
+
+            function escapeHtml(s) {
+                return $('<div>').text(s).html();
+            }
+
+            function starsHtml(rate) {
+                let out = '';
+                for (let i = 1; i <= 5; i++) {
+                    out += i <= rate ? '★' : '<span class="empty">★</span>';
+                }
+                return out;
+            }
+
+            $('#reviewForm').on('submit', function (e) {
+                e.preventDefault();
+                $('#formError').hide();
+
+                const data = {
+                    name: $('#name').val().trim(),
+                    title: $('#title').val().trim(),
+                    company: $('#company').val().trim(),
+                    description: $('#description').val().trim(),
+                    rate: $rate.val(),
+                };
+
+                if (!data.name || !data.title || !data.company || !data.description) {
+                    $('#formError').text('Please fill in every field.').show();
+                    return;
+                }
+                if (!data.rate) {
+                    $('#formError').text('Please pick a star rating.').show();
                     return;
                 }
 
                 $.ajax({
-                    url: "/submit",
-                    type: "POST",
-                    data: { new_message: message },
-                    success: function(response) {
-                        if (response && response.message) {
-                            $(".messages").append("<p>" + response.message + "</p>");
-                            messageInput.val("");
-                        }
+                    url: '/submit',
+                    type: 'POST',
+                    data: data,
+                    success: function (resp) {
+                        $('#emptyState').remove();
+                        const today = new Date().toISOString().slice(0, 10);
+                        const html = `
+                            <div class="review">
+                                <div class="review-head">
+                                    <div class="who">
+                                        ${escapeHtml(resp.name)}
+                                        <small>${escapeHtml(resp.title)} · ${escapeHtml(resp.company)}</small>
+                                    </div>
+                                    <div class="stars">${starsHtml(resp.rate)}</div>
+                                </div>
+                                <div class="review-desc">${escapeHtml(resp.description)}</div>
+                                <div class="review-date">${today}</div>
+                            </div>`;
+                        $('#reviewsList').prepend(html);
+
+                        $('#reviewForm')[0].reset();
+                        $rate.val('');
+                        paint(0);
                     },
-                    error: function(xhr, status, error) {
-                        console.error("AJAX Error:", status, error);
-                    }
+                    error: function (xhr) {
+                        const msg = (xhr.responseJSON && xhr.responseJSON.error) || 'Something went wrong.';
+                        $('#formError').text(msg).show();
+                    },
                 });
             });
         });
     </script>
 </body>
+
 </html>
