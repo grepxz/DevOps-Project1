@@ -23,7 +23,8 @@
 ---
 
 ### **1. Project Overview**
-This project if a variation of existng repository.In this repo I am deploying a 2-tier web application for professional feedback reviews (Flask + MySQL) on an AWS EC2 instance. The deployment is containerized using Docker and Docker Compose. A full CI/CD pipeline is established using Jenkins to automate the build and deployment process whenever new code is pushed to a GitHub repository.
+* This project if a variation of existng repository.In this repo I am deploying a 2-tier web application for professional feedback reviews (Flask + MySQL) on an AWS EC2 instance.
+* The deployment is containerized using Docker and Docker Compose. A full CI/CD pipeline is established using Jenkins to automate the build and deployment process whenever new code is pushed to a GitHub repository.
 <img src="diagrams/app.png">
 ---
 
